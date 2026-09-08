@@ -1,0 +1,132 @@
+
+<html lang="it">
+<head>
+    <title>Volta la Carta - Accedi o Registrati</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stile.css">
+    <script src="js/script.js"defer></script>
+</head>
+<body>
+
+<header>    
+    <div class="top-banner">Spedizione gratuita!</div>
+
+    <nav class="navbar">
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="burger-menu">&#9776;</label>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="novità.html">Novità</a></li>
+            <li><a href="bouquet.html">Bouquet</a></li>
+            <li class="dropdown">
+                <label for="menu-toggle2" class="dropdown-label">Fiori Singoli &#11167;</label>
+                <input type="checkbox" id="menu-toggle2" />
+                <ul class="menu-dropdown">
+                    <li><a href="prodotto_fiore.html?name=ROSA">Rosa</a></li>
+                    <li><a href="prodotto_fiore.html?name=GIRASOLE">Girasole</a></li>
+                    <li><a href="prodotto_fiore.html?name=ERICA">Erica</a></li>
+                    <li><a href="prodotto_fiore.html?name=BACCHE">Bacche</a></li>
+                    <li><a href="prodotto_fiore.html?name=DALIA">Dalia</a></li>
+                    <li><a href="prodotto_fiore.html?name=MARGHERITA">Margherita</a></li>
+                    <li><a href="fiorisingoli.html">Vedi tutti...</a></li>
+                </ul>
+            </li>
+            <li><a href="eventi&matrimoni.html">Eventi e Matrimoni</a></li>
+        </ul>
+        <ul class="menu-icons">
+            <li><a href="login.html"><img src="immagini/icons/account.png" alt="Account"></a></li>
+            <li class="cart-icon-container"> 
+                <a href="carrello.html">
+                    <img src="immagini/icons/shop.png" alt="Carrello">
+                    <span id="cart-item-count" class="cart-item-count"></span> 
+                    </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<body>
+    <div class="container">
+        <div class="auth-header">
+            <h5>Volta la Carta</h5>
+            <p>paper flower</p>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" onclick="switchTab('login')">Accedi</button>
+            <button class="auth-tab" onclick="switchTab('register')">Registrati</button>
+        </div>
+
+        <div class="auth-forms">
+            <!-- Form di Login -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                    <div class="error-message" id="loginEmailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+
+                <button type="submit" class="auth-button">Accedi</button>
+                
+                <div class="loading" id="loginLoading">
+                    <div class="spinner"></div>
+                    <p>Verifica in corso...</p>
+                </div>
+            </form>
+
+            <!-- Form di Registrazione -->
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">Nome completo</label>
+                    <input type="text" id="registerName" name="name" required>
+                    <div class="error-message" id="registerNameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                    <div class="error-message" id="registerEmailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" name="password" required>
+                    <div class="password-requirements">
+                        <div class="requirement" id="lengthReq">• Almeno 8 caratteri</div>
+                        <div class="requirement" id="upperReq">• Una lettera maiuscola</div>
+                        <div class="requirement" id="lowerReq">• Una lettera minuscola</div>
+                        <div class="requirement" id="numberReq">• Un numero</div>
+                    </div>
+                    <div class="error-message" id="registerPasswordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Conferma Password</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                    <div class="error-message" id="registerConfirmPasswordError"></div>
+                </div>
+
+                <button type="submit" class="auth-button">Registrati</button>
+                
+                <div class="loading" id="registerLoading">
+                    <div class="spinner"></div>
+                    <p>Registrazione in corso...</p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer>
+    <p>&copy; 2025 Volta la Carta. Tutti i diritti riservati.</p>
+    <div class="social-icons">
+        <a href="404.html"><img src="immagini/social/facebook.png" alt="Logo Facebook"></a>
+        <a href="immagini/working.png"><img src="immagini/social/instagram.png" alt="Logo Instagram"></a>
+    </div>
+</footer> 
+</body>
+</html>

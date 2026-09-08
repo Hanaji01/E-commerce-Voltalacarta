@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Volta la Carta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stile.css">
+</head>
+    <body>
+        <div class="top-banner">Spedizione gratuita!</div>
+            <nav class="navbar">
+                <input type="checkbox" id="menu-toggle" />
+                <label for="menu-toggle" class="burger-menu">&#9776;</label>
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="novità.html">Novità</a></li>
+                    <li><a href="bouquet.html">Bouquet</a></li>
+                    <li class="dropdown">
+                        <label for="menu-toggle2" class="dropdown-label">Fiori Singoli &#11167;</label>
+                        <input type="checkbox" id="menu-toggle2" />
+                        <ul class="menu-dropdown">
+                            <li><a href="prodotto_fiore.html?name=ROSA">Rosa</a></li>
+                            <li><a href="prodotto_fiore.html?name=GIRASOLE">Girasole</a></li>
+                            <li><a href="prodotto_fiore.html?name=ERICA">Erica</a></li>
+                            <li><a href="prodotto_fiore.html?name=BACCHE">Bacche</a></li>
+                            <li><a href="prodotto_fiore.html?name=DALIA">Dalia</a></li>
+                            <li><a href="prodotto_fiore.html?name=MARGHERITA">Margherita</a></li>
+                            <li><a href="fiorisingoli.html">Vedi tutti...</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="eventi&matrimoni.html">Eventi e Matrimoni</a></li>
+                </ul>
+                <!-- Icone a destra -->
+                <ul class="menu-icons">
+                    <li><a href="login.html"><img src="immagini/icons/account.png" alt="Account"></a></li>
+                    <li class="cart-icon-container"> 
+                        <a href="carrello.html">
+                            <img src="immagini/icons/shop.png" alt="Carrello">
+                            <span id="cart-item-count" class="cart-item-count"></span> 
+                        </a>
+                    </li>
+                 </ul>
+            </nav>
+        </div>
+
+        <div class="sub-menu">
+            <a href="eventi&matrimoni.html">Matrimonio</a> |
+            <a href="comunione.html">Comunione</a> |
+            <a href="nascita.html">Nascita</a> |
+            <a href="laurea.html">Laurea</a> |
+            <a href="richieste_personalizzate.html">Richieste personalizzate</a>
+        </div>
+
+        <div class="container">
+            <h1>Hai in mente qualcosa di speciale?</h1>
+            <p>Raccontacelo, e lo realizzeremo per te!</p>
+        
+            <div class="form-container">
+                <div class="form-note">
+                    <p><strong>Compila il modulo</strong> per ricevere un preventivo personalizzato per il tuo evento speciale.</p>
+                </div>
+                <form id="eventoForm", method="post">
+                    <div class="form-group">
+                        <label for="tipoEvento">
+                            Tipo di evento <span class="required">*</span>
+                        </label>
+                        <select id="tipoEvento" name="tipoEvento" required>
+                            <option value="">Seleziona il tipo di evento</option>
+                            <option value="matrimonio">Matrimonio</option>
+                            <option value="comunione">Comunione</option>
+                            <option value="cresima">Cresima</option>
+                            <option value="battesimo">Battesimo</option>
+                            <option value="compleanno">Compleanno</option>
+                            <option value="anniversario">Anniversario</option>
+                            <option value="laurea">Laurea</option>
+                            <option value="altro">Altro</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dataPrevista">
+                                Data prevista <span class="required">*</span>
+                            </label>
+                            <input type="date" id="dataPrevista" name="dataPrevista" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="numeroPezzi">
+                                Numero pezzi
+                            </label>
+                            <input type="number" id="numeroPezzi" name="numeroPezzi" min="1" placeholder="es. 5">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ideePreferenze">
+                            Idee o preferenze
+                        </label>
+                        <textarea id="ideePreferenze" name="ideePreferenze" placeholder="Descrivi la tua visione: colori preferiti, stile, fiori specifici, dimensioni, budget indicativo..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">
+                                Nome <span class="required">*</span>
+                            </label>
+                            <input type="text" id="nome" name="nome" required placeholder="Il tuo nome">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">
+                                Telefono
+                            </label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+39 123 456 7890">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">
+                            Email <span class="required">*</span>
+                        </label>
+                        <input type="email" id="email" name="email" required placeholder="la-tua-email@esempio.com">
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Invia Richiesta
+                    </button>
+                </form>
+                <p id="risposta"></p>
+            </div>
+        </div>
+
+    <footer>
+        <p>&copy; 2025 Volta la Carta. Tutti i diritti riservati.</p>
+        <div class="social-icons">
+            <a href="#"><img src="immagini/social/facebook.png" alt="Logo Facebook"></a>
+            <a href="https://www.instagram.com/_volta_la_carta?igsh=d2VjYW9wam5sdzNp"><img src="immagini/social/instagram.png" alt="Logo Instagram"></a>
+        </div>
+    </footer>  
+
+     <script src="js/cart_global.js"></script>
+    <script src="js/scriptform.js"></script> </body>
+</body>
+</html>

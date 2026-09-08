@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Volta la Carta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stile.css">
+</head>
+<body>
+
+    <div class="top-banner">Spedizione gratuita!</div>
+
+    <nav class="navbar">
+        <!-- Checkbox per attivare il menu -->
+        <input type="checkbox" id="menu-toggle" />
+    
+        <!-- Burger menu -->
+        <label for="menu-toggle" class="burger-menu">&#9776;</label>
+    
+        <!-- Menu principale -->
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="novità.html">Novità</a></li>
+            <li><a href="bouquet.html">Bouquet</a></li>
+            <li class="dropdown">
+                <label for="menu-toggle2" class="dropdown-label">Fiori Singoli &#11167;</label>
+                <input type="checkbox" id="menu-toggle2" />
+                <ul class="menu-dropdown">
+                    <li><a href="prodotto_fiore.html?name=ROSA">Rosa</a></li>
+                    <li><a href="prodotto_fiore.html?name=GIRASOLE">Girasole</a></li>
+                    <li><a href="prodotto_fiore.html?name=ERICA">Erica</a></li>
+                    <li><a href="prodotto_fiore.html?name=BACCHE">Bacche</a></li>
+                    <li><a href="prodotto_fiore.html?name=DALIA">Dalia</a></li>
+                    <li><a href="prodotto_fiore.html?name=MARGHERITA">Margherita</a></li>
+                    <li><a href="fiorisingoli.html">Vedi tutti...</a></li>
+                </ul>
+            </li>
+            <li><a href="eventi&matrimoni.html">Eventi e Matrimoni</a></li>
+        </ul>
+    
+        <!-- Icone a destra -->
+        <!-- Icone a destra -->
+        <ul class="menu-icons">
+            <li><a href="login.html"><img src="immagini/icons/account.png" alt="Account"></a></li>
+            <li class="cart-icon-container"> 
+                <a href="carrello.html">
+                    <img src="immagini/icons/shop.png" alt="Carrello">
+                    <span id="cart-item-count" class="cart-item-count"></span> 
+                    </a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="sub-menu">
+        <a href="eventi&matrimoni.html">Matrimonio</a> |
+        <a href="comunione.html">Comunione</a> |
+        <a href="nascita.html">Nascita</a> |
+        <a href="laurea.html">Laurea</a> |
+        <a href="richieste_personalizzate.html">Richieste personalizzate</a>
+    </div>
+
+    <section id="sec3">
+        <h3>Comunione</h3>
+        <p>Offri ai tuoi ospiti un ricordo prezioso e unico del tuo evento speciale. Le nostre bomboniere artigianali sono create con cura e passione, pensate per lasciare un segno indelebile. Ogni pezzo è un piccolo capolavoro che racchiude l'emozione del tuo giorno, un gesto di gratitudine che durerà nel tempo.</p>
+        <div class="gallery_eventi">
+            <div class="image-container">
+                <img src="immagini/comunione/comunione4.png" alt="Rosa - Simbolo di bellezza e passione">
+            </div>
+            <div class="image-container">
+                <img src="immagini/comunione/comunione3.png" alt="Girasole - Simbolo di allegria e forza">
+            </div>
+            <div class="image-container">
+                <img src="immagini/comunione/comunione1.png" alt="Girasole - Simbolo di allegria e forza">
+            </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 Volta la Carta. Tutti i diritti riservati.</p>
+        <div class="social-icons">
+            <a href="#"><img src="immagini/social/facebook.png" alt="Logo Facebook"></a>
+            <a href="https://www.instagram.com/_volta_la_carta?igsh=d2VjYW9wam5sdzNp"><img src="immagini/social/instagram.png" alt="Logo Instagram"></a>
+        </div>
+    </footer>  
+    <script src="js/cart_global.js"></script>
+</body>
+</html>

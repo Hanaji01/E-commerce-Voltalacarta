@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Volta la Carta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stile.css">
+</head>
+<body>
+
+    <div class="top-banner">Spedizione gratuita!</div>
+
+    <nav class="navbar">
+        <!-- Checkbox per attivare il menu -->
+        <input type="checkbox" id="menu-toggle" />
+    
+        <!-- Burger menu -->
+        <label for="menu-toggle" class="burger-menu">&#9776;</label>
+    
+        <!-- Menu principale -->
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="novità.html">Novità</a></li>
+            <li><a href="bouquet.html">Bouquet</a></li>
+            <li class="dropdown">
+                <label for="menu-toggle2" class="current" class="dropdown-label">Fiori Singoli &#11167;</label>
+                <input type="checkbox" id="menu-toggle2" />
+                <ul class="menu-dropdown">
+                    <li><a href="prodotto_fiore.html?name=ROSA">Rosa</a></li>
+                    <li><a href="prodotto_fiore.html?name=GIRASOLE">Girasole</a></li>
+                    <li><a href="prodotto_fiore.html?name=ERICA">Erica</a></li>
+                    <li><a href="prodotto_fiore.html?name=BACCHE">Bacche</a></li>
+                    <li><a href="prodotto_fiore.html?name=DALIA">Dalia</a></li>
+                    <li><a href="prodotto_fiore.html?name=MARGHERITA">Margherita</a></li>
+                    <li><a href="fiorisingoli.html">Vedi tutti...</a></li>
+                </ul>
+            </li>
+            <li><a href="eventi&matrimoni.html">Eventi e Matrimoni</a></li>
+        </ul>
+    
+        <!-- Icone a destra -->
+        <ul class="menu-icons">
+            <li><a href="login.html"><img src="immagini/icons/account.png" alt="Account"></a></li>
+            <li class="cart-icon-container"> 
+                <a href="carrello.html">
+                    <img src="immagini/icons/shop.png" alt="Carrello">
+                    <span id="cart-item-count" class="cart-item-count"></span> 
+                    </a>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="sec2">
+        <div class="gallery">
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/dalia.webp" alt="Dalia">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=DALIA">Dalia</a>
+                    <p class="flower-price">€12,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/cosmos.webp" alt="Cosmos">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=COSMOS">Cosmos</a>
+                    <p class="flower-price">€5,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/rosa-botanica.webp" alt="Rosa Botanica">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=ROSA BOTANICA">Rosa Botanica</a>
+                    <p class="flower-price">€12,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/nasturzio.webp" alt="Nasturzio">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=NASTURZIO">Nasturzio</a>
+                    <p class="flower-price">€4,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/margherita.webp" alt="Margherita">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=MARGHERITA">Margherite</a>
+                    <p class="flower-price">€4,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/peonia.webp" alt="Peonia">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=PEONIA">Peonia</a>
+                    <p class="flower-price">€25,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/erica.webp" alt="Erica">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=ERICA">Erica</a>
+                    <p class="flower-price">€5,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/girasole.webp" alt="Girasole">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=GIRASOLE">Girasole</a>
+                    <p class="flower-price">€25,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/bacche.webp" alt="Bacche">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=BACCHE">Bacche</a>
+                    <p class="flower-price">€5,00</p>
+                </div>
+            </div> 
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/zinnia.webp" alt="Zinnia">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=ZINNIA">Zinnia</a>
+                    <p class="flower-price">€5,00</p>
+                </div>
+            </div> 
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/sakura.webp" alt="Sakura">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=SAKURA">Sakura</a>
+                    <p class="flower-price">€3,00</p>
+                </div>
+            </div>   
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/dalia-pompon.webp" alt="Dalia Pompon">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=DALIA%20POMPON">Dalia Pompon</a>
+                    <p class="flower-price">€12,00</p>
+                </div>
+            </div>  
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/malva.webp" alt="Malva">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=MALVA">Malva</a>
+                    <p class="flower-price">€4,00</p>
+                </div>
+            </div>  
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/rosa.webp" alt="Rosa">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=ROSA">Rosa</a>
+                    <p class="flower-price">€4,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/elicriso.webp" alt="Elicriso">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=ELICRISO">Elicriso</a>
+                    <p class="flower-price">€6,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/dalia-grandiflora.webp" alt="Dalia Grandiflora">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=DALIA%20GRANDIFLORA">Dalia Grandiflora</a>
+                    <p class="flower-price">€18,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/gerbere.webp" alt="Gerbera">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=GERBERE">Gerbera</a>
+                    <p class="flower-price">€6,00</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="immagini/fiorisingoli/ortensia.webp" alt="Ortensia">
+                <div class="flower-info">
+                    <a href="prodotto_fiore.html?name=ORTENSIA">Ortensia</a>
+                    <p class="flower-price">€2,00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Volta la Carta. Tutti i diritti riservati.</p>
+        <div class="social-icons">
+            <a href="#"><img src="immagini/social/facebook.png" alt="Logo Facebook"></a>
+            <a href="https://www.instagram.com/_volta_la_carta?igsh=d2VjYW9wam5sdzNp"><img src="immagini/social/instagram.png" alt="Logo Instagram"></a>
+        </div>
+    </footer> 
+    <script src="js/cart_global.js"></script> 
+</body>
+</html>

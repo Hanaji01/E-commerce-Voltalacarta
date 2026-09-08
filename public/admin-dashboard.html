@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Volta La Carta</title>
+    <style>
+        /* Stili specifici per la dashboard */
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        /* Nuove classi per la gestione delle sezioni */
+        .data-section { display: none; } /* Tutte le sezioni sono nascoste di default */
+        .data-section.active { display: block; } /* Solo la sezione con 'active' è visibile */
+        
+        .order-list { margin-top: 20px; }
+        .order-card, .request-card { /* Aggiornato per includere .request-card */
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .order-card h3, .request-card h3 { margin-top: 0; color: #555; } /* Aggiornato */
+        .order-card p, .request-card p { margin: 5px 0; } /* Aggiornato */
+        .order-card ul, .request-card ul { /* Aggiornato */
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+            border-top: 1px dashed #eee;
+            padding-top: 10px;
+        }
+        .order-card ul li, .request-card ul li { /* Aggiornato */
+            margin-bottom: 3px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .status-select { margin-left: 10px; padding: 5px; border-radius: 3px; border: 1px solid #ccc; }
+        .update-status-btn { padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        .update-status-btn:hover { background-color: #45a049; }
+        .logout-btn { float: right; padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .logout-btn:hover { background-color: #da190b; }
+        .admin-nav { margin: 20px 0; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .admin-nav a { margin-right: 15px; padding: 5px 10px; text-decoration: none; color: #333; }
+        .admin-nav a.active { font-weight: bold; border-bottom: 2px solid #4CAF50; }
+        small {
+            font-size: 14px;
+            color: #666;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="logout-btn" onclick="logout()">Logout</button>
+        <h1>Dashboard Amministratore</h1>
+        <nav class="admin-nav">
+            <a href="#orders" class="nav-link active" data-target="orders-section">Ordini</a>
+            <a href="#messages" class="nav-link" data-target="messages-section">Messaggi</a>
+        </nav>
+        <div id="admin-info"></div>
+
+        <div id="orders-section" class="data-section active"> <h2>Gestione Ordini <small>(Mostra ultimi ordini)</small></h2>
+            <div id="orders-container" class="order-list">
+                <p>Caricamento ordini...</p>
+            </div>
+        </div>
+
+        <div id="messages-section" class="data-section"> <h2>Richieste Personalizzate <small>(Dal form Eventi e Matrimoni)</small></h2>
+            <div id="messages-container" class="order-list">
+                <p>Caricamento richieste...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/admin-dashboard.js"></script> 
+    <script>
+        // Funzione di logout (rimane nel tuo HTML per comodità)
+        function logout() {
+            if (confirm('Sei sicuro di voler effettuare il logout?')) {
+                localStorage.removeItem('jwt_token'); // Rimuovi il token dal localStorage se lo avevi messo lì
+                localStorage.removeItem('userData'); // Rimuovi altri dati utente se salvati
+                // Elimina il cookie JWT. Il path='/' è importante.
+                document.cookie = 'jwtToken=; Max-Age=0; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+                window.location.href = '/login.html'; // Reindirizza alla pagina di login
+            }
+        }
+    </script>
+</body>
+</html>
