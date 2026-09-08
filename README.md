@@ -65,19 +65,3 @@ npm start
 As part of continuous learning and software development practice, future iterations aim to integrate advanced features such as enhanced user authentication, a dedicated admin dashboard for inventory control, and smoother edge-case optimizations.
 
 ---
-
-*Created with creativity and code.*
-
-```
-
----
-
-### Per caricarlo su GitHub:
-Salva le modifiche nel tuo file `README.md` locale e dai questi comandi nel terminale PowerShell:
-
-```powershell
-git add README.md
-git commit -m "Update README.md with a narrative and discursive style"
-git push origin main
-
-```
