@@ -1,8 +1,3 @@
-Certamente! Ho trasformato il file in una versione **più discorsiva e narrativa**, perfetta per raccontare la storia, la filosofia e l'architettura tecnica del progetto direttamente nella pagina principale di GitHub.
-
-Ecco il testo pronto da incollare nel tuo file **`README.md`**:
-
-```markdown
 # 🌸 Volta la Carta – Artisanal E-commerce Platform
 
 Welcome to **Voltalacarta**, a full-stack e-commerce web application born from the passion for handcrafted paper flowers and unique artisanal creations. This project was built to bridge traditional craftsmanship with modern web technologies, offering a seamless and engaging digital storefront designed with a flexible web-to-mobile strategy.
