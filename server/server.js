@@ -364,42 +364,58 @@ app.get('/api/prodotto-fiore', async (req, res) => {
 
 // Rotta per la gestione del checkout
 app.post('/api/checkout', async (req, res) => {// Questa rotta gestisce il processo di checkout
-    const { items, shippingInfo, paymentInfo, totalAmount } = req.body;
+    const { items, shippingInfo, paymentInfo } = req.body;
 
-    if (!items || items.length === 0 || !shippingInfo || !paymentInfo || !totalAmount) {// Controlla se i dati del checkout sono completi
+    if (!Array.isArray(items) || items.length === 0 || !shippingInfo || !paymentInfo) {// Controlla se i dati del checkout sono completi
         return res.status(400).json({ success: false, message: 'Dati del checkout incompleti.' });
     }
+    for (const item of items) {// Quantità intera e ragionevole per ogni articolo
+        if (typeof item.name !== 'string' || !Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 100) {
+            return res.status(400).json({ success: false, message: 'Articolo del carrello non valido.' });
+        }
+    }
+
+    // Nome e indirizzo arrivano dal form in campi separati
+    const nomeCliente = shippingInfo.fullName || shippingInfo.name;
+    const indirizzo = [shippingInfo.address, shippingInfo.zipCode, shippingInfo.city, shippingInfo.country]
+        .filter(Boolean).join(', ');
 
     let connection;
     try {// Prova a ottenere una connessione dal pool
         connection = await pool.getConnection();
         await connection.beginTransaction();
 
-        
-        console.log('Dati per inserimento ordine:', {// Log dei dati dell'ordine per il debug
-            status: 'In attesa di elaborazione',
-            totalAmount: totalAmount,
-            name: shippingInfo.name,
-            email: shippingInfo.email,
-            address: shippingInfo.address,
-            paymentMethod: paymentInfo.method
-        });
+        // Prezzi e totale si calcolano dal database: quelli inviati dal browser
+        // possono essere modificati da chiunque e non vengono usati.
+        const righe = [];
+        for (const item of items) {
+            const [rows] = await connection.execute(
+                'SELECT price FROM bouquets WHERE name = ? UNION ALL SELECT price FROM fiori_singoli WHERE name = ? LIMIT 1',
+                [item.name, item.name]
+            );
+            if (rows.length === 0) {
+                await connection.rollback();
+                return res.status(400).json({ success: false, message: `Prodotto non trovato: ${item.name}` });
+            }
+            righe.push({ nome: item.name, quantita: item.quantity, prezzo: Number(rows[0].price) });
+        }
+        const totale = Math.round(righe.reduce((s, r) => s + r.prezzo * r.quantita, 0) * 100) / 100;
 
         const [orderResult] = await connection.execute(// Inserisce un nuovo ordine nella tabella 'ordini'
             'INSERT INTO ordini (data_ordine, stato_ordine, totale, nome_cliente, email_cliente, indirizzo_spedizione, metodo_pagamento) VALUES (NOW(), ?, ?, ?, ?, ?, ?)',
-            ['In attesa di elaborazione', totalAmount, shippingInfo.name, shippingInfo.email, shippingInfo.address, paymentInfo.method]
+            ['In attesa di elaborazione', totale, nomeCliente, shippingInfo.email, indirizzo, paymentInfo.method]
         );
         const orderId = orderResult.insertId;// Ottiene l'ID dell'ordine appena inserito
 
-        for (const item of items) {// Per ogni articolo nell'ordine, inserisce i dettagli dell'ordine nella tabella 'dettagli_ordine'
+        for (const r of righe) {// Per ogni articolo nell'ordine, inserisce i dettagli dell'ordine nella tabella 'dettagli_ordine'
             await connection.execute(
                 'INSERT INTO dettagli_ordine (ordine_id, prodotto_nome, quantita, prezzo_unitario) VALUES (?, ?, ?, ?)',
-                [orderId, item.name, item.quantity, item.price]
+                [orderId, r.nome, r.quantita, r.prezzo]
             );
         }
 
         await connection.commit();// Conferma la transazione se tutto va bene
-        res.status(200).json({ success: true, message: 'Ordine processato con successo!', orderId: orderId });
+        res.status(200).json({ success: true, message: 'Ordine processato con successo!', orderId: orderId, total: totale });
 
     } catch (err) {
         if (connection) {// Se c'è un errore, rollback della transazione
