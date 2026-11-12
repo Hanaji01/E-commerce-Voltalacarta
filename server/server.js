@@ -1,13 +1,19 @@
 // server.js
+require('dotenv').config();
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const mysql = require('mysql2/promise');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-const PORT = 3000;
-const JWT_SECRET = 'REMOVED'; // Ricorda di usare una variabile d'ambiente per questo in produzione!
+const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+    console.error('❌ JWT_SECRET mancante: copia .env.example in .env e impostalo.');
+    process.exit(1);
+}
 
 // Middleware base 
 app.use(express.json()); // Per parsare il corpo delle richieste JSON
@@ -19,10 +25,10 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Pool MySQL (configurazione del tuo database)
 const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: 'REMOVED', // Assicurati che questa password sia corretta
-    database: 'volta_la_carta_db', // Assicurati che il nome del database sia corretto
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME || 'volta_la_carta_db',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -104,7 +110,8 @@ app.post('/api/login', async (req, res) => {
         const user = rows[0];
 
         
-        if (password !== user.password) { // Controlla se la password fornita corrisponde a quella nel database
+        const passwordOk = await bcrypt.compare(password, user.password); // Le password sono salvate come hash bcrypt
+        if (!passwordOk) {
             return res.status(401).json({ error: 'Credenziali non valide.' });
         }
 
@@ -124,6 +131,7 @@ app.post('/api/login', async (req, res) => {
         res.json({ // Invia una risposta JSON con successo, messaggio e dati utente
             success: true,
             message: 'Login avvenuto con successo!',
+            token: token,
             user: { id: user.id, email: user.email, isAdmin: user.is_admin }
         });
 
@@ -135,6 +143,34 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+
+// Rotta per la registrazione di un nuovo utente
+app.post('/api/register', async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({ error: 'Email e password sono richiesti.' });
+    }
+    if (password.length < 8) {
+        return res.status(400).json({ error: 'La password deve avere almeno 8 caratteri.' });
+    }
+
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        const [existing] = await connection.execute('SELECT id FROM users WHERE email = ?', [email]);
+        if (existing.length > 0) {
+            return res.status(409).json({ error: 'Email già registrata.' });
+        }
+        const hash = await bcrypt.hash(password, 10);
+        await connection.execute('INSERT INTO users (email, password, is_admin) VALUES (?, ?, 0)', [email, hash]);
+        res.status(201).json({ success: true, message: 'Registrazione completata.' });
+    } catch (err) {
+        console.error('Errore durante la registrazione:', err);
+        res.status(500).json({ error: 'Errore interno del server durante la registrazione.' });
+    } finally {
+        if (connection) connection.release();
+    }
+});
 
 // Rotta protetta per servire admin-dashboard.html
 app.get('/admin-dashboard.html', (req, res, next) => { // Questa rotta serve la pagina admin-dashboard.html solo agli amministratori autenticati
@@ -239,7 +275,7 @@ app.get('/api/admin/custom-requests', authenticateAdmin, async (req, res) => {//
 
 
 // Rotta per gestire l'invio del form "event_requests"
-app.post('/api/event-request', async (req, res) => {
+app.post(['/api/event-request', '/api/richieste-personalizzate'], async (req, res) => {
     const { tipoEvento, dataPrevista, numeroPezzi, ideePreferenze, nome, telefono, email } = req.body;
 
     if (!tipoEvento || !dataPrevista || !email) {// Controlla se i campi obbligatori sono presenti

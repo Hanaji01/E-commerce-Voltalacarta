@@ -1,67 +1,70 @@
-# 🌸 Volta la Carta – Artisanal E-commerce Platform
+# Volta la Carta
 
-Welcome to **Voltalacarta**, a full-stack e-commerce web application born from the passion for handcrafted paper flowers and unique artisanal creations. This project was built to bridge traditional craftsmanship with modern web technologies, offering a seamless and engaging digital storefront designed with a flexible web-to-mobile strategy.
+An online shop for handmade paper flowers: single flowers, bouquets and custom pieces for weddings, graduations, christenings and other events. The backend is Node.js with Express and MySQL; the frontend is plain HTML, CSS and JavaScript.
 
-## 💡 About the Project
+The site is in Italian.
 
-The core idea behind Volta la Carta is to give a digital home to delicate, handmade paper art. Beyond just an online catalog, the platform was conceived as a complete web solution that handles everything from dynamic product browsing to secure backend routing and relational data storage. 
+[TODO: one or two lines on where the idea came from, e.g. whether Volta la Carta is a real shop, yours or someone you know.]
 
-Designed with a clean, responsive layout, the application ensures that users enjoy a smooth and immersive shopping experience regardless of the device they use.
+## What it does
 
-## 🛠️ Architecture & Tech Stack
+- **Catalogue.** Product pages for single flowers (with colour choices) and bouquets are filled from the database, with an image gallery for each product.
+- **Cart and checkout.** The cart lives in `localStorage`. At checkout the order and its lines are written in a single MySQL transaction, so a failed order leaves nothing half-saved.
+- **Custom requests.** A form for event orders (event type, date, number of pieces, ideas) that is stored for the shop owner to review.
+- **Accounts.** Registration and login. Passwords are stored as bcrypt hashes, and the session is a JWT in an `httpOnly` cookie that expires after one hour.
+- **Admin dashboard.** Visible only to admin users. Lists orders with their items and custom requests, and lets the admin move an order through its states (*In attesa*, *In preparazione*, *Spedito*, *Completato*, *Annullato*).
+- **PWA basics.** Web app manifest and service worker, so the site can be installed on a phone.
 
-This project follows a classic client-server architecture:
+## Running it locally
 
-* **Frontend:** Crafted using **HTML5**, **CSS3**, and vanilla **JavaScript**, focusing on a responsive and user-friendly interface that highlights the visual beauty of the handcrafted products.
-* **Backend:** Powered by **Node.js** and **Express.js**, acting as a robust API layer that processes client requests and manages application logic.
-* **Database:** Built on a relational **MySQL** database structured to efficiently handle product categories, inventories, and user requests.
+You need Node.js 18+ and MySQL 8.
 
-## 🚀 Getting Started Locally
-
-If you would like to run a local copy of this project, follow these simple steps:
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/Hanaji01/E-commerce-Voltalacarta.git](https://github.com/Hanaji01/E-commerce-Voltalacarta.git)
-
-```
-
-2. **Navigate into the project directory:**
 ```bash
+git clone https://github.com/Hanaji01/E-commerce-Voltalacarta.git
 cd E-commerce-Voltalacarta
-
-```
-
-
-3. **Install the required dependencies:**
-```bash
 npm install
-
 ```
 
+Create the database and tables:
 
-4. **Set up your environment variables:**
-Create a `.env` file in the root directory and configure your local database credentials:
-```env
-DB_HOST=localhost
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
-DB_NAME=voltalacarta
-PORT=3000
-
-```
-
-
-5. **Launch the application:**
 ```bash
-npm start
-
+mysql -u root -p < database/schema.sql
 ```
 
+Copy `.env.example` to `.env` and fill in your database user, password and a random `JWT_SECRET`. Then create an admin account and start the server:
 
+```bash
+npm run create-admin -- admin@example.com "choose-a-password"
+npm start
+```
 
-## ✨ Future Improvements & Goals
+The site runs at http://localhost:3000. Product pages show data only after you add rows to the `bouquets` and `fiori_singoli` tables; the `name` column must match the `?name=` value in the product links (for example `PEONIA` or `BOUQUET CIPRIA`).
 
-As part of continuous learning and software development practice, future iterations aim to integrate advanced features such as enhanced user authentication, a dedicated admin dashboard for inventory control, and smoother edge-case optimizations.
+If you have a database from an older version of the project with plain-text passwords, `npm run hash-passwords` converts them to bcrypt hashes.
 
----
+## API
+
+| Method | Route | Access |
+| --- | --- | --- |
+| `POST` | `/api/register` | public |
+| `POST` | `/api/login` | public |
+| `GET` | `/api/bouquets/:name` | public |
+| `GET` | `/api/prodotto-fiore?name=` | public |
+| `POST` | `/api/checkout` | public |
+| `POST` | `/api/richieste-personalizzate` | public |
+| `GET` | `/api/admin/orders` | admin |
+| `PUT` | `/api/admin/orders/:id/status` | admin |
+| `GET` | `/api/admin/custom-requests` | admin |
+
+## Structure
+
+```
+server/server.js     Express app: routes, auth middleware, MySQL pool
+database/schema.sql  Tables for users, products, orders and custom requests
+scripts/             create-admin and password migration
+public/              HTML pages, CSS, client-side JS, images, service worker
+```
+
+## Limits
+
+Payment is simulated: checkout records the chosen method but does not charge anything. [TODO: anything else you would add next.]
