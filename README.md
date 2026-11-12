@@ -2,9 +2,7 @@
 
 An online shop for handmade paper flowers: single flowers, bouquets and custom pieces for weddings, graduations, christenings and other events. The backend is Node.js with Express and MySQL; the frontend is plain HTML, CSS and JavaScript.
 
-The site is in Italian.
-
-[TODO: one or two lines on where the idea came from, e.g. whether Volta la Carta is a real shop, yours or someone you know.]
+The site is in Italian. It is also one of the three test applications in my internship research on converting web apps to Android, where it was converted as a PWA (see [FocusFlow](https://github.com/Hanaji01/focusflow) for the third one).
 
 ## What it does
 
@@ -67,4 +65,4 @@ public/              HTML pages, CSS, client-side JS, images, service worker
 
 ## Limits
 
-Payment is simulated: checkout records the chosen method but does not charge anything. [TODO: anything else you would add next.]
+Payment is simulated: checkout records the chosen method but does not charge anything, and the card fields are never sent to the server. There are no automated tests yet.
