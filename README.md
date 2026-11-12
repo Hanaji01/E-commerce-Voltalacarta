@@ -2,6 +2,8 @@
 
 An online shop for handmade paper flowers: single flowers, bouquets and custom pieces for weddings, graduations, christenings and other events. The backend is Node.js with Express and MySQL; the frontend is plain HTML, CSS and JavaScript.
 
+Final project for the Web Programming course at the University of Perugia, graded 30/30 cum laude. Before publishing it I reviewed it for security: credentials moved to environment variables, passwords hashed with bcrypt, prices and totals computed on the server.
+
 The site is in Italian. It is also one of the three test applications in my internship research on converting web apps to Android, where it was converted as a PWA (see [FocusFlow](https://github.com/Hanaji01/focusflow) for the third one).
 
 ## What it does
